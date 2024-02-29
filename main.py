@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 app.title = "AI API"
@@ -16,6 +17,21 @@ app.license_info = {
 }
 
 
+laws = [
+    {
+        "id": 1,
+        "title": "Codigo Civil",
+        "description": "Codigo Civil Dominicano",
+        "category": 0,
+    }
+]
+
+
 @app.get("/health", tags=["Base"])
 def message():
-    return "Health check passed"
+    return HTMLResponse("<h1>Health Check Passed!</h1")
+
+
+@app.get("/laws", tags=["Laws"])
+def get_laws():
+    return laws
